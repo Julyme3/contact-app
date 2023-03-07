@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <transition name="contact">
-      <ContactModal />
+      <ContactModal v-if="contactsStore.isContactModalShown" />
     </transition>
     <RouterView />
   </div>
@@ -9,7 +9,9 @@
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import ContactModal from "@/components/ContactModal.vue"
+import ContactModal from '@/components/ContactModal.vue'
+import { useContactsStore } from '@/stores/contacts'
+const contactsStore = useContactsStore()
 </script>
 
 <style scoped>

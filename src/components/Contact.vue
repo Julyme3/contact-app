@@ -1,7 +1,7 @@
 <template>
-  <router-link class="contact flex" :to="{ name: 'contact', params: { id: 1 } }">
+  <router-link class="contact flex" :to="{ name: 'contact', params: { id: contact.id } }">
     <div class="contact-group flex-column">
-      <span class="contact-title">Имя</span>
+      <span class="contact-title">{{ contact.name }}</span>
     </div>
     <div class="flex contact-edit">
       <button @click.prevent="editContact" type="button">
@@ -14,11 +14,25 @@
 
 <script setup lang="ts">
 import SvgIcon from '@/components/Base/SvgIcon.vue'
+import { defineProps } from 'vue'
+import type { IContact } from '@/types/contact'
+
+interface Props {
+  contact: IContact
+  index: number
+}
+const props = defineProps<Props>()
+const emits = defineEmits<{
+  (e: 'edit', contact: IContact): void
+  (e: 'delete', index: number): void
+}>()
 
 const editContact = () => {
-  console.log(1)
+  emits('edit', props.contact)
 }
-const deleteContact = () => {}
+const deleteContact = () => {
+  emits('delete', props.index)
+}
 </script>
 
 <style scoped lang="less">

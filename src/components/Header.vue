@@ -5,7 +5,7 @@
       <div class="search-wrap">
         <input class="search-input" type="text" placeholder="Поиск" />
       </div>
-      <button>
+      <button type="button" @click="emit('openContactModal')">
         <SvgIcon name="plus-icon" />
       </button>
     </div>
@@ -14,6 +14,8 @@
 
 <script setup lang="ts">
 import SvgIcon from '@/components/Base/SvgIcon.vue'
+
+const emit = defineEmits(['openContactModal'])
 </script>
 
 <style scoped lang="less">
