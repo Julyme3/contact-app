@@ -10,21 +10,20 @@
       </button>
     </div>
   </header>
-
 </template>
 
 <script setup lang="ts">
-import SvgIcon from "@/components/Base/SvgIcon.vue";
+import SvgIcon from '@/components/Base/SvgIcon.vue'
 </script>
 
 <style scoped lang="less">
 .header-wrap {
   display: flex;
+  gap: 10px;
   margin: 20px 0;
 }
 
 .search {
-
   &-wrap {
     flex: 1;
   }

@@ -34,7 +34,7 @@ import Button from "@/components/Base/Button/Button.vue";
 import SvgIcon from "@/components/Base/SvgIcon.vue";
 
 const onSubmit = () => {}
-const shown = ref(true)
+const shown = ref(false)
 
 const saveContact = () => {}
 const closeContact = () => {

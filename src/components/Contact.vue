@@ -1,24 +1,24 @@
 <template>
-  <router-link
-      class="contact flex"
-      to="/"
-  >
+  <router-link class="contact flex" :to="{ name: 'contact', params: { id: 1 } }">
     <div class="contact-group flex-column">
       <span class="contact-title">Имя</span>
-      <span class="contact-email">Email</span>
-    </div>
-    <div class="contact-group flex">
-      <span class="contact-title">Телефон</span>
     </div>
     <div class="flex contact-edit">
-      <SvgIcon name="edit-icon" />
-      <SvgIcon name="delete-icon" />
+      <button @click.prevent="editContact" type="button">
+        <SvgIcon name="edit-icon" />
+      </button>
+      <button @click.prevent="deleteContact" type="button"><SvgIcon name="delete-icon" /></button>
     </div>
   </router-link>
 </template>
 
 <script setup lang="ts">
-import SvgIcon from '@/components/Base/SvgIcon.vue';
+import SvgIcon from '@/components/Base/SvgIcon.vue'
+
+const editContact = () => {
+  console.log(1)
+}
+const deleteContact = () => {}
 </script>
 
 <style scoped lang="less">
@@ -29,13 +29,13 @@ import SvgIcon from '@/components/Base/SvgIcon.vue';
   margin-bottom: 16px;
   color: #fff;
   border-radius: 20px;
-  padding: 28px 32px;
+  padding: 18px 32px;
   background-color: var(--blue);
   align-items: center;
-  transition: transform 0.2s;
+  transition: opacity 0.2s;
 
   &:hover {
-    transform: scale(1.02);
+    opacity: 0.9;
   }
 
   &-title {
@@ -49,7 +49,7 @@ import SvgIcon from '@/components/Base/SvgIcon.vue';
 
   &-edit {
     margin-left: auto;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
   }
 }
