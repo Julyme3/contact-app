@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import type { IContact } from '@/types/contact'
+import ContactService from '@/services/contacts'
 
 export type RootState = {
   isContactModalShown: boolean
@@ -34,6 +35,10 @@ export const useContactsStore = defineStore('contacts', {
     },
     setActiveContactId(id: string) {
       this.activeContactId = id
+    },
+    async fetchContact() {
+      const results = await ContactService.readInvoices()
+      this.contactsData = results
     },
     setContact(payload: IContact) {
       this.contactsData.push(payload)

@@ -18,6 +18,7 @@ import Header from '@/components/Header.vue'
 import { useContactsStore } from '@/stores/contacts'
 
 const contactsStore = useContactsStore()
+contactsStore.fetchContact()
 
 const editContact = (id: string) => {
   contactsStore.setActiveContactId(id)
