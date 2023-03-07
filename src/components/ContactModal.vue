@@ -32,7 +32,7 @@ import { v4 as uuid4 } from 'uuid'
 
 const contactsStore = useContactsStore()
 const stateForm = ref<IContact>(
-  contactsStore.currentContact ?? {
+  (contactsStore.isEditingContact && contactsStore.getContactById) || {
     id: uuid4(),
     name: '',
     email: '',
@@ -44,7 +44,6 @@ const onSubmit = () => {}
 
 const resetForm = () => {
   stateForm.value = { id: stateForm.value.id, name: '', email: '', phone: '' }
-  contactsStore.setCurrentContact(null)
 }
 const saveContact = () => {
   if (contactsStore.isEditingContact) {

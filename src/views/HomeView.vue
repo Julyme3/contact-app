@@ -16,17 +16,16 @@
 import Contact from '@/components/Contact.vue'
 import Header from '@/components/Header.vue'
 import { useContactsStore } from '@/stores/contacts'
-import type { IContact } from '@/types/contact'
 
 const contactsStore = useContactsStore()
 
-const editContact = (contact: IContact) => {
-  contactsStore.setCurrentContact(contact)
+const editContact = (id: string) => {
+  contactsStore.setActiveContactId(id)
   contactsStore.setEditingContact(true)
   contactsStore.toggleContactModal()
 }
 
-const deleteContact = (index: number) => {
-  contactsStore.deleteContact(index)
+const deleteContact = (id: string) => {
+  contactsStore.deleteContact(id)
 }
 </script>

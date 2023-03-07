@@ -23,15 +23,15 @@ interface Props {
 }
 const props = defineProps<Props>()
 const emits = defineEmits<{
-  (e: 'edit', contact: IContact): void
-  (e: 'delete', index: number): void
+  (e: 'edit', id: string): void
+  (e: 'delete', id: string): void
 }>()
 
 const editContact = () => {
-  emits('edit', props.contact)
+  emits('edit', props.contact.id)
 }
 const deleteContact = () => {
-  emits('delete', props.index)
+  emits('delete', props.contact.id)
 }
 </script>
 
