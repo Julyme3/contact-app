@@ -1,0 +1,53 @@
+:root {
+  --primary: #6979f8;
+  --primary-hover: #a5affb;
+  --second: #be52f2;
+  --second-hover: #dba5f5;
+  --success: #00c48c;
+  --success-hover: #7ddfc3;
+  --info: #0084f4;
+  --info-hover: #66b5f8;
+  --brend: #141625;
+  --warning: #ffa26b;
+  --warning-hover: #ffc7a6;
+  --danger: #ff647c;
+  --danger-hover: #fdafbb;
+  --blue: #6979f8;
+  --grey: #ecebed;
+  --grey-dark: #f7f5f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #fafafa;
+  margin: 0;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+button {
+  background-color: #fff;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+// animated invoice modal
+.contact-enter-active,
+.contact-leave-active {
+  transition: 0.8s ease transform;
+}
+
+.contact-enter-from,
+.contact-leave-to {
+  transform: translateX(-790px);
+}
+
