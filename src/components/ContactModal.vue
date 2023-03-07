@@ -16,7 +16,7 @@
       </div>
       <div class="form-btns">
         <Button @click="closeContact" label="Отмена" color="second" />
-        <Button @click="saveContact" label="Сохранить" />
+        <Button @click="saveContact" type="submit" label="Сохранить" />
       </div>
     </form>
   </div>
@@ -40,7 +40,9 @@ const stateForm = ref<IContact>(
   }
 )
 
-const onSubmit = () => {}
+const onSubmit = () => {
+  saveContact()
+}
 
 const resetForm = () => {
   stateForm.value = { id: stateForm.value.id, name: '', email: '', phone: '' }

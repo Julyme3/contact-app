@@ -19,6 +19,5 @@ const contactsStore = useContactsStore()
   max-width: 1024px;
   padding: 30px;
   margin: 0 auto;
-  outline: 1px solid;
 }
 </style>

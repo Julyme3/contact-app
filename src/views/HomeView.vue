@@ -1,8 +1,8 @@
 <template>
   <main class="home">
-    <Header @openContactModal="contactsStore.toggleContactModal" />
+    <SearchAndAdd v-model:query.trim="query" @openContactModal="contactsStore.toggleContactModal" />
     <Contact
-      v-for="(contact, index) in contactsStore.contactsData"
+      v-for="(contact, index) in filteredContact"
       :key="contact.id"
       :contact="contact"
       :index="index"
@@ -13,13 +13,28 @@
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import Contact from '@/components/Contact.vue'
-import Header from '@/components/Header.vue'
+import SearchAndAdd from '@/components/SearchAndAdd.vue'
 import { useContactsStore } from '@/stores/contacts'
 
 const contactsStore = useContactsStore()
 contactsStore.fetchContact()
 
+const query = ref('')
+const trimmedQuery = computed(() => {
+  return query.value.replace(/\s+/g, ' ')
+})
+
+const filteredContact = computed(() => {
+  return contactsStore.contactsData.filter(({ name, email, phone }) => {
+    return Boolean(
+      email.includes(trimmedQuery.value) ||
+        name.includes(trimmedQuery.value) ||
+        phone.includes(trimmedQuery.value)
+    )
+  })
+})
 const editContact = (id: string) => {
   contactsStore.setActiveContactId(id)
   contactsStore.setEditingContact(true)

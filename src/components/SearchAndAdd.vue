@@ -3,9 +3,9 @@
     <h1 class="heading-1">Список контактов</h1>
     <div class="header-wrap">
       <div class="search-wrap">
-        <input class="search-input" type="text" placeholder="Поиск" />
+        <input v-model="localFilterState" class="search-input" type="text" placeholder="Поиск" />
       </div>
-      <button type="button" @click="emit('openContactModal')">
+      <button type="button" @click="emits('openContactModal')">
         <SvgIcon name="plus-icon" />
       </button>
     </div>
@@ -14,8 +14,24 @@
 
 <script setup lang="ts">
 import SvgIcon from '@/components/Base/SvgIcon.vue'
+import { computed } from 'vue'
+const props = defineProps<{
+  query: string
+}>()
 
-const emit = defineEmits(['openContactModal'])
+const emits = defineEmits<{
+  (e: 'openContactModal'): void
+  (e: 'update:query', value: string): void
+}>()
+
+const localFilterState = computed({
+  get() {
+    return props.query
+  },
+  set(value) {
+    emits('update:query', value)
+  }
+})
 </script>
 
 <style scoped lang="less">
