@@ -4,29 +4,40 @@
       <SvgIcon class="close-icon" name="cross-icon" @click="closeContact" />
       <div class="form-group">
         <label for="fio" class="form-label"> ФИО: </label>
-        <input v-model="stateForm.name" id="fio" class="form-input" type="text" />
+        <input v-model="v$.name.$model" id="fio" class="form-input" type="text" />
+        <div class="input-errors" v-for="error of v$.name.$errors" :key="error.$uid">
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="phone" class="form-label"> Телефон: </label>
-        <input v-model="stateForm.phone" id="phone" class="form-input" type="text" />
+        <input v-model="v$.phone.$model" id="phone" class="form-input" type="text" />
+        <div class="input-errors" v-for="error of v$.phone.$errors" :key="error.$uid">
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="email" class="form-label"> Email: </label>
-        <input v-model="stateForm.email" id="email" class="form-input" type="email" />
+        <input v-model="v$.email.$model" id="email" class="form-input" type="email" />
+        <div class="input-errors" v-for="error of v$.email.$errors" :key="error.$uid">
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div class="form-group">
         <AddTag v-model:tags="stateForm.tags" />
       </div>
       <div class="form-btns">
         <Button @click="closeContact" label="Отмена" color="second" />
-        <Button type="submit" label="Сохранить" />
+        <Button type="submit" label="Сохранить" :disabled="!isFormValid" />
       </div>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import useVuelidate from '@vuelidate/core'
+import { required, email, helpers } from '@vuelidate/validators'
 import Button from '@/components/Base/Button/Button.vue'
 import SvgIcon from '@/components/Base/SvgIcon.vue'
 import AddTag from '@/components/AddTag.vue'
@@ -44,6 +55,20 @@ const stateForm = ref<IContact>(
     tags: []
   }
 )
+
+const onlyDigits = helpers.regex(/^[0-9]+$/)
+const rules = {
+  name: { required },
+  phone: {
+    required,
+    onlyDigits: helpers.withMessage('This field should contains only digits', onlyDigits)
+  },
+  email: { email, required }
+}
+
+const v$ = useVuelidate(rules, stateForm.value)
+
+const isFormValid = computed(() => v$.value.$anyDirty && !v$.value.$invalid)
 
 const resetForm = () => {
   stateForm.value = { id: stateForm.value.id, name: '', email: '', phone: '', tags: [] }
