@@ -5,3 +5,5 @@ export interface IContact {
   email: string
   tags?: string[]
 }
+
+export type ContactKeyUnion = keyof IContact

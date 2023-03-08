@@ -17,21 +17,19 @@ import { computed, ref } from 'vue'
 import Contact from '@/components/Contact.vue'
 import SearchAndAdd from '@/components/SearchAndAdd.vue'
 import { useContactsStore } from '@/stores/contacts'
+import { ContactKeyUnion } from '@/types/contact'
 
 const contactsStore = useContactsStore()
 
 const query = ref('')
+const searchByField: ContactKeyUnion[] = ['name', 'email', 'phone', 'tags']
 const trimmedQuery = computed(() => {
   return query.value.replace(/\s+/g, ' ')
 })
 
 const filteredContact = computed(() => {
-  return contactsStore.contactsData.filter(({ name, email, phone }) => {
-    return Boolean(
-      email.includes(trimmedQuery.value) ||
-        name.includes(trimmedQuery.value) ||
-        phone.includes(trimmedQuery.value)
-    )
+  return contactsStore.contactsData.filter((contact) => {
+    return searchByField.some((key) => contact[key]?.includes(trimmedQuery.value))
   })
 })
 const editContact = (id: string) => {

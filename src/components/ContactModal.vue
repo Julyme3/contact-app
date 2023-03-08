@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <form class="contact-form" @submit.prevent="onSubmit">
+    <form class="contact-form" @submit.prevent="saveContact">
       <SvgIcon class="close-icon" name="cross-icon" @click="closeContact" />
       <div class="form-group">
         <label for="fio" class="form-label"> ФИО: </label>
@@ -19,7 +19,7 @@
       </div>
       <div class="form-btns">
         <Button @click="closeContact" label="Отмена" color="second" />
-        <Button @click="saveContact" type="submit" label="Сохранить" />
+        <Button type="submit" label="Сохранить" />
       </div>
     </form>
   </div>
@@ -44,10 +44,6 @@ const stateForm = ref<IContact>(
     tags: []
   }
 )
-
-const onSubmit = () => {
-  saveContact()
-}
 
 const resetForm = () => {
   stateForm.value = { id: stateForm.value.id, name: '', email: '', phone: '', tags: [] }
