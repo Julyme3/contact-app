@@ -1,13 +1,13 @@
 <template>
   <button
-      :class="[
+    :class="[
       `btn btn-${color}`,
       {
         'btn-large': size === 'large'
       }
     ]"
-      type="button"
-      @click="onClickBtn"
+    type="button"
+    @click="onClickBtn"
   >
     <span>{{ label }}</span>
   </button>
@@ -36,8 +36,6 @@ const onClickBtn = () => {
 
 <style lang="less">
 .btn {
-  margin-right: 10px;
-  margin-bottom: 10px;
   padding: 0 20px;
   height: 40px;
   color: #fff;
@@ -46,6 +44,7 @@ const onClickBtn = () => {
   cursor: pointer;
   font-size: 15px;
   transition: 0.2s background-color;
+  margin: 0 10px 10px 0;
 
   &-primary {
     background-color: var(--primary);
@@ -63,6 +62,11 @@ const onClickBtn = () => {
     &:enabled:hover {
       background-color: var(--second-hover);
     }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 }
 </style>
