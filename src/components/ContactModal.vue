@@ -35,15 +35,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import useVuelidate from '@vuelidate/core'
-import { required, email, helpers } from '@vuelidate/validators'
+import { ref } from 'vue'
 import Button from '@/components/Base/Button/Button.vue'
 import SvgIcon from '@/components/Base/SvgIcon.vue'
 import AddTag from '@/components/AddTag.vue'
 import { useContactsStore } from '@/stores/contacts'
 import type { IContact } from '@/types/contact'
 import { v4 as uuid4 } from 'uuid'
+import useValidationForm from '@/composables/useValidateForm'
 
 const contactsStore = useContactsStore()
 const stateForm = ref<IContact>(
@@ -56,20 +55,7 @@ const stateForm = ref<IContact>(
   }
 )
 
-const onlyDigits = helpers.regex(/^[0-9]+$/)
-const rules = {
-  name: { required },
-  phone: {
-    required,
-    onlyDigits: helpers.withMessage('This field should contains only digits', onlyDigits)
-  },
-  email: { email, required }
-}
-
-const v$ = useVuelidate(rules, stateForm.value)
-
-const isFormValid = computed(() => v$.value.$anyDirty && !v$.value.$invalid)
-
+const { v$, isFormValid } = useValidationForm(stateForm.value)
 const resetForm = () => {
   stateForm.value = { id: stateForm.value.id, name: '', email: '', phone: '', tags: [] }
 }
@@ -82,6 +68,7 @@ const saveContact = () => {
 
   closeContact()
 }
+
 const closeContact = () => {
   contactsStore.toggleContactModal()
   resetForm()
