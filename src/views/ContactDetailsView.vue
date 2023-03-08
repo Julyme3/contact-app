@@ -8,6 +8,10 @@
           <span class="contact-field">Телефон</span>: {{ contact.phone }}
         </li>
         <li class="contact-item"><span class="contact-field">Email</span>: {{ contact.email }}</li>
+        <li class="contact-item contact-tags">
+          <span class="contact-field">Теги</span>:
+          <TagList :tags="contact.tags" />
+        </li>
       </ul>
       <div class="contacts-btns">
         <Button @click="deleteContact" type="button" label="Удалить" color="primary" />
@@ -19,19 +23,21 @@
 </template>
 
 <script setup lang="ts">
-import Button from '@/components/Base/Button/Button.vue'
-import { useContactsStore } from '@/stores/contacts'
 import { useRoute, useRouter } from 'vue-router'
+import { useContactsStore } from '@/stores/contacts'
+import Button from '@/components/Base/Button/Button.vue'
+import TagList from '@/components/TagList.vue'
+import { computed } from 'vue'
 
 const route = useRoute()
 const router = useRouter()
 const contactsStore = useContactsStore()
 
 contactsStore.setActiveContactId(route.params.id as string)
-const contact = contactsStore.getContactById
+const contact = computed(() => contactsStore.getContactById)
 
 const deleteContact = () => {
-  contactsStore.deleteContact(contact!.id)
+  contactsStore.deleteContact(contact.value!.id)
   router.push({ name: 'home' })
 }
 const editContact = () => {
@@ -51,6 +57,10 @@ const editContact = () => {
   &-field {
     font-size: 18px;
     font-weight: bold;
+  }
+  &-tags {
+    display: flex;
+    align-items: center;
   }
 }
 </style>

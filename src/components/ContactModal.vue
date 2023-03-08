@@ -15,7 +15,7 @@
         <input v-model="stateForm.email" id="email" class="form-input" type="email" />
       </div>
       <div class="form-group">
-        <TagList v-model:tags="stateForm.tags" />
+        <AddTag v-model:tags="stateForm.tags" />
       </div>
       <div class="form-btns">
         <Button @click="closeContact" label="Отмена" color="second" />
@@ -29,7 +29,7 @@
 import { ref } from 'vue'
 import Button from '@/components/Base/Button/Button.vue'
 import SvgIcon from '@/components/Base/SvgIcon.vue'
-import TagList from '@/components/TagList.vue'
+import AddTag from '@/components/AddTag.vue'
 import { useContactsStore } from '@/stores/contacts'
 import type { IContact } from '@/types/contact'
 import { v4 as uuid4 } from 'uuid'

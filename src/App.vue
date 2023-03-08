@@ -12,6 +12,10 @@ import { RouterView } from 'vue-router'
 import ContactModal from '@/components/ContactModal.vue'
 import { useContactsStore } from '@/stores/contacts'
 const contactsStore = useContactsStore()
+
+if (!contactsStore.contactsData.length) {
+  contactsStore.fetchContact()
+}
 </script>
 
 <style scoped>
