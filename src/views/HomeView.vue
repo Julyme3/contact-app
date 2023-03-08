@@ -19,7 +19,9 @@ import SearchAndAdd from '@/components/SearchAndAdd.vue'
 import { useContactsStore } from '@/stores/contacts'
 
 const contactsStore = useContactsStore()
-contactsStore.fetchContact()
+if (!contactsStore.contactsData.length) {
+  contactsStore.fetchContact()
+}
 
 const query = ref('')
 const trimmedQuery = computed(() => {

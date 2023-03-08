@@ -3,7 +3,8 @@
     "id": "1",
     "name": "Julia",
     "phone": "9 888 88 11 11",
-    "email": "test1@mail.ru"
+    "email": "test1@mail.ru",
+    "tags": ["Family", "Work"]
   },
   {
     "id": "2",
@@ -15,7 +16,8 @@
     "id": "3",
     "name": "Vasya",
     "phone": "9 888 88 11 77",
-    "email": "test3@mail.ru"
+    "email": "test3@mail.ru",
+    "tags": ["Family", "Work"]
   },
   {
     "id": "4",

@@ -14,6 +14,9 @@
         <label for="email" class="form-label"> Email: </label>
         <input v-model="stateForm.email" id="email" class="form-input" type="email" />
       </div>
+      <div class="form-group">
+        <TagList v-model:tags="stateForm.tags" />
+      </div>
       <div class="form-btns">
         <Button @click="closeContact" label="Отмена" color="second" />
         <Button @click="saveContact" type="submit" label="Сохранить" />
@@ -26,6 +29,7 @@
 import { ref } from 'vue'
 import Button from '@/components/Base/Button/Button.vue'
 import SvgIcon from '@/components/Base/SvgIcon.vue'
+import TagList from '@/components/TagList.vue'
 import { useContactsStore } from '@/stores/contacts'
 import type { IContact } from '@/types/contact'
 import { v4 as uuid4 } from 'uuid'
@@ -36,7 +40,8 @@ const stateForm = ref<IContact>(
     id: uuid4(),
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    tags: []
   }
 )
 
@@ -45,7 +50,7 @@ const onSubmit = () => {
 }
 
 const resetForm = () => {
-  stateForm.value = { id: stateForm.value.id, name: '', email: '', phone: '' }
+  stateForm.value = { id: stateForm.value.id, name: '', email: '', phone: '', tags: [] }
 }
 const saveContact = () => {
   if (contactsStore.isEditingContact) {
