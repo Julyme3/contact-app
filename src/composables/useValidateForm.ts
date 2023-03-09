@@ -3,7 +3,6 @@ import useVuelidate from '@vuelidate/core'
 import { computed } from 'vue'
 import type { IContact } from '@/types/contact'
 
-// TODO добавить валидацию при редактировании контакта
 const useValidationForm = (state: IContact) => {
   const onlyDigits = helpers.regex(/^[0-9]+$/)
   const rules = {

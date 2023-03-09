@@ -2,27 +2,27 @@
   {
     "id": "1",
     "name": "Julia",
-    "phone": "9 888 88 11 11",
+    "phone": "9888881111",
     "email": "test1@mail.ru",
     "tags": ["Family", "Work"]
   },
   {
     "id": "2",
     "name": "Oleg",
-    "phone": "9 888 88 11 33",
+    "phone": "9888881133",
     "email": "test2@mail.ru"
   },
   {
     "id": "3",
     "name": "Vasya",
-    "phone": "9 888 88 11 77",
+    "phone": "9888881177",
     "email": "test3@mail.ru",
     "tags": ["Family", "Work"]
   },
   {
     "id": "4",
     "name": "Elena",
-    "phone": "9 888 88 11 55",
+    "phone": "9888881155",
     "email": "test4@mail.ru"
   }
 ]
