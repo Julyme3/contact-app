@@ -1,10 +1,10 @@
 <template>
   <router-link class="contact flex" :to="{ name: 'contact', params: { id: contact.id } }">
     <div class="contact-group flex-column">
-      <span class="contact-title">{{ contact.name }}</span>
+      <span class="contact-title" data-test="name">{{ contact.name }}</span>
     </div>
     <div class="flex contact-edit">
-      <button @click.prevent="editContact" type="button">
+      <button @click.prevent="editContact" type="button" data-test="edit-btn">
         <SvgIcon name="edit-icon" />
       </button>
       <button @click.prevent="deleteContact" type="button"><SvgIcon name="delete-icon" /></button>
@@ -19,7 +19,6 @@ import type { IContact } from '@/types/contact'
 
 interface Props {
   contact: IContact
-  index: number
 }
 const props = defineProps<Props>()
 const emits = defineEmits<{

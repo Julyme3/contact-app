@@ -2,10 +2,10 @@
   <main class="home">
     <SearchAndAdd v-model:query.trim="query" @openContactModal="contactsStore.toggleContactModal" />
     <Contact
-      v-for="(contact, index) in filteredContact"
+      v-for="contact in filteredContact"
       :key="contact.id"
       :contact="contact"
-      :index="index"
+      data-test="contact"
       @edit="editContact"
       @delete="deleteContact"
     />
